@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="header">
-      <nav class="nav flex-row">
+      <nav class="nav">
         <a class="nav-item" @click="switchNav('1')">前端</a>
         <a class="nav-item" @click="switchNav('2')">生活</a>
         <a class="nav-item" @click="switchNav('3')">其他</a>
@@ -29,10 +29,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../assets/sass/common.scss';
 $navItems: 3;
+
 .header {
   position: relative;
   .nav {
+    @include flexRow();
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -41,8 +44,12 @@ $navItems: 3;
     cursor: pointer;
     .nav-item {
       flex: 1;
+      display: block;
       text-align: center;
       font-size: 16px;
+      &:active {
+        background: #ddd;
+      }
     }
   }
   .nav-active {
@@ -55,7 +62,7 @@ $navItems: 3;
     transition: all .3s;
     width: 50px;
     height: 5px;
-    background-color: #000;
+    background: #333;
     @for $i from 1 through $navItems {
       &.pos#{$i} {
         left: 100% / $navItems * $i - 100% / ($navItems * 2);

@@ -1,6 +1,6 @@
 <template>
   <div id="left">
-    <router-link :to="item.linkto" class="item flex-row" :key="item.title" v-for="item in itemInfo">
+    <router-link :to="item.linkto" class="item" :key="item.title" v-for="item in itemInfo">
       <div class="left">{{ item.content }}</div>
 
       <div class="right">{{ item.title }}</div>
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'index_left',
+  name: 'FrameLeft',
   data () {
     return {
       itemInfo: [{
@@ -27,7 +27,7 @@ export default {
         linkto: 'test2'
       }, {
         title: '备忘录',
-        content: '生怕记不住',
+        content: '没啥用',
         linkto: {
           name: 'diary'
         }
@@ -38,66 +38,60 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../../assets/sass/common.scss';
+
 $item_hide_width: 50px;
 $item_show_width: 150px;
 $item_height: 50px;
 $item_margin: 20px;
 
-.flex-row
-{
+.flex-row {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-item: center;
 }
-@mixin txtOverHide() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-#left
-{
+
+#left {
   position: fixed;
   top: 50%;
   left: -($item_show_width - $item_hide_width);
   z-index: 9999;
   width: $item_show_width;
   transform: translateY(-50%);
-  background-color: rgba(0,0,0,.8);
-  .item
-  {
+  .item {
+    @include flexRow();
     position: relative;
     left: 0;
     width: $item_show_width;
     height: $item_height;
     line-height: $item_height;
-    text-align: center;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
     color: #333;
+    text-align: center;
     transition: left .2s;
-    &:hover
-    {
+    box-shadow: 0 3px 3px 0 #999;
+    &:hover {
       left: $item_show_width - $item_hide_width;
       transition: left .2s;
     }
-    .left
-    {
+    .left {
       box-sizing: border-box;
       width: $item_show_width - $item_hide_width;
       height: $item_height;
       padding: 0 10px;
-      background-color: #333;
+      background: #333;
       color: #fff;
       @include txtOverHide();
     }
-    .right
-    {
+    .right {
       width: $item_hide_width;
       height: $item_height;
-      background-color: #ddd;
+      background: rgb(255, 255, 255);
     }
   }
-  .item:not(:first-child)
-  {
+  .item:not(:first-child) {
     margin-top: $item_margin;
   }
 }

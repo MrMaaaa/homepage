@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Index from '@/components/index';
-import IndexMain from '@/components/index/index_main';
-import Diary from '@/components/self_diary/diary';
 
+import FrameMain from '@/components/frame/main';
+import FrameLeft from '@/components/frame/left';
+import Diary from '@/pages/diary/diary';
 
 Vue.use(Router);
 
@@ -15,11 +15,17 @@ export default new Router({
   }, {
     path: '/index',
     name: 'index',
-    component: Index,
+    components: {
+      container: FrameMain,
+      left: FrameLeft
+    },
   }, {
     path: '/diary',
     name: 'diary',
-    component: Diary
+    components: {
+      container: Diary,
+      left: FrameLeft
+    }
   }],
   scrollBehavior(to, from, savedPosition) {
     // return 期望滚动到哪个的位置
